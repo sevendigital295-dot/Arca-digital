@@ -162,48 +162,17 @@
         <div class="container">
             <div class="ebook-content">
                 <h3>ACESSO IMEDIATO: Garanta sua vaga e receba o eBook <span class="highlight">'7 Passos para o Sucesso Digital'</span></h3>
-                <div id="mlb2-34247387" class="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-34247387">
-  <div class="ml-form-align-center">
-    <div class="ml-form-embedWrapper embedForm">
-      <div class="ml-form-embedBody ml-form-embedBodyHorizontal row-form">
-        <div class="ml-form-embedContent">
-          <h4>ACESSO IMEDIATO: Garanta sua vaga e receba o eBook '7 Passos para o Sucesso Digital'</h4>
-          <p>Insira seu nome e e-mail abaixo para garantir sua vaga no evento e receber o eBook gratuito.</p>
-        </div>
-        <form class="ml-block-form" action="https://app.mailerlite.com/webforms/submit/34247387" data-code="34247387" method="post" target="_blank">
-          <div class="ml-form-horizontalRow">
-            <div class="ml-input-horizontal">
-              <div class="ml-field-group ml-field-name ml-validate-required ml-field-text">
-                <input type="text" class="form-control" data-inputmask="" name="fields[name]" placeholder="Seu Nome Completo" autocomplete="name">
-              </div>
-              <div class="ml-field-group ml-field-email ml-validate-required ml-field-email">
-                <input type="email" class="form-control" data-inputmask="" name="fields[email]" placeholder="Seu Melhor E-mail" autocomplete="email">
-              </div>
-            </div>
-            <div class="ml-button-horizontal">
-              <button type="submit" class="btn-primary">QUERO MEU ACESSO E O EBOOK GRÁTIS</button>
-            </div>
-          </div>
-          <input type="hidden" name="ml-submit" value="1">
-        </form>
-      </div>
-      <div class="ml-form-successBody row-success" style="display:none">
-        <div class="ml-form-successContent">
-          <h4>Obrigado!</h4>
-          <p>Sua inscrição foi confirmada. Verifique sua caixa de entrada para o link do evento e o eBook.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<script>
-  function ml_webform_success_34247387() {
-    // Redireciona o usuário para o download do eBook
-    window.location.href = 'thank_you.html';
-  }
-</script>
-<img src="https://track.mailerlite.com/webforms/o/34247387/b2t4c4?v1670438188" width="1" height="1" style="max-width:1px; min-height:1px; display:block; border:0;" alt="." />
-<script src="https://static.mailerlite.com/js/w/webforms.min.js?v64355323924345" type="text/javascript"></script>
+                <div class="form-wrapper">
+                    <h4>ACESSO IMEDIATO: Garanta sua vaga e receba o eBook '7 Passos para o Sucesso Digital'</h4>
+                    <p>Insira seu nome e e-mail abaixo para garantir sua vaga no evento e receber o eBook gratuito.</p>
+                    <form id="lead-form" class="lead-form-local">
+                        <div class="form-inputs">
+                            <input type="text" id="form-name" name="name" placeholder="Seu Nome Completo" required autocomplete="name">
+                            <input type="email" id="form-email" name="email" placeholder="Seu Melhor E-mail" required autocomplete="email">
+                            <button type="submit" class="btn-primary">QUERO MEU ACESSO E O EBOOK GRÁTIS</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </section>
@@ -216,5 +185,23 @@
     </footer>
 
     <script src="script.js"></script>
+    <script>
+        // Formulário local
+        document.getElementById('lead-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('form-name').value;
+            const email = document.getElementById('form-email').value;
+            
+            // Validação básica
+            if (name.trim() === '' || email.trim() === '') {
+                alert('Por favor, preencha todos os campos!');
+                return;
+            }
+            
+            // Redireciona para a página de agradecimento
+            window.location.href = 'thank_you.html?name=' + encodeURIComponent(name) + '&email=' + encodeURIComponent(email);
+        });
+    </script>
 </body>
 </html>
