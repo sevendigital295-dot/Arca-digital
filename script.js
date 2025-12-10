@@ -53,5 +53,39 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 1000);
 
 
-    // A lógica do formulário de Lead agora é tratada pelo MailerLite (código injetado no index.html)
+    // Lógica do formulário de Lead com captura de email e download do eBook
+    document.getElementById('lead-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const name = document.getElementById('form-name').value;
+        const email = document.getElementById('form-email').value;
+        
+        // Validação básica
+        if (name.trim() === '' || email.trim() === '') {
+            alert('Por favor, preencha todos os campos!');
+            return;
+        }
+        
+        // Guardar email no localStorage (base de dados local)
+        const subscribers = JSON.parse(localStorage.getItem('arca_digital_subscribers') || '[]');
+        subscribers.push({
+            name: name,
+            email: email,
+            date: new Date().toISOString()
+        });
+        localStorage.setItem('arca_digital_subscribers', JSON.stringify(subscribers));
+        
+        // Fazer download do eBook
+        const link = document.createElement('a');
+        link.href = 'ebook-7-passos.pdf';
+        link.download = 'ebook-7-passos.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        // Redirecionar para página de agradecimento após 1 segundo
+        setTimeout(() => {
+            window.location.href = 'thank_you.html?name=' + encodeURIComponent(name) + '&email=' + encodeURIComponent(email);
+        }, 1000);
+    });
 });

@@ -185,23 +185,5 @@
     </footer>
 
     <script src="script.js"></script>
-    <script>
-        // Formulário local
-        document.getElementById('lead-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const name = document.getElementById('form-name').value;
-            const email = document.getElementById('form-email').value;
-            
-            // Validação básica
-            if (name.trim() === '' || email.trim() === '') {
-                alert('Por favor, preencha todos os campos!');
-                return;
-            }
-            
-            // Redireciona para a página de agradecimento
-            window.location.href = 'thank_you.html?name=' + encodeURIComponent(name) + '&email=' + encodeURIComponent(email);
-        });
-    </script>
 </body>
 </html>
