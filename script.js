@@ -66,22 +66,25 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         
-        // Guardar email no localStorage (base de dados local)
-        const subscribers = JSON.parse(localStorage.getItem('arca_digital_subscribers') || '[]');
-        subscribers.push({
-            name: name,
-            email: email,
-            date: new Date().toISOString()
-        });
-        localStorage.setItem('arca_digital_subscribers', JSON.stringify(subscribers));
+        // Guardar email no localStorage (base de dados local) - comentado por enquanto
+        // const subscribers = JSON.parse(localStorage.getItem('arca_digital_subscribers') || '[]');
+        // subscribers.push({
+        //     name: name,
+        //     email: email,
+        //     date: new Date().toISOString()
+        // });
+        // localStorage.setItem('arca_digital_subscribers', JSON.stringify(subscribers));
         
         // Fazer download do eBook
         const link = document.createElement('a');
         link.href = 'ebook-7-passos.pdf';
-        link.download = 'ebook-7-passos.pdf';
+        link.download = '7-Passos-para-o-Sucesso-Digital.pdf';
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
+        
+        // Mostrar mensagem de sucesso
+        alert('Seu eBook está sendo descarregado! Obrigado por se inscrever.');
         
         // Redirecionar para página de agradecimento após 1 segundo
         setTimeout(() => {
