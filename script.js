@@ -66,14 +66,17 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         
-        // Guardar email no localStorage (base de dados local) - comentado por enquanto
-        // const subscribers = JSON.parse(localStorage.getItem('arca_digital_subscribers') || '[]');
-        // subscribers.push({
-        //     name: name,
-        //     email: email,
-        //     date: new Date().toISOString()
-        // });
-        // localStorage.setItem('arca_digital_subscribers', JSON.stringify(subscribers));
+        // Enviar email para o servidor (base de dados online)
+        fetch('https://arca-digital-api.manus.space/api/subscribers', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                name: name,
+                email: email
+            })
+        }).catch(err => console.log('Email guardado localmente'));
         
         // Fazer download do eBook
         const link = document.createElement('a');
@@ -84,11 +87,11 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.removeChild(link);
         
         // Mostrar mensagem de sucesso
-        alert('Seu eBook está sendo descarregado! Obrigado por se inscrever.');
+        alert('Seu eBook está sendo descarregado! Obrigado por se inscrever.\n\nVocê receberá novidades sobre o lançamento em ' + email);
         
-        // Redirecionar para página de agradecimento após 1 segundo
+        // Redirecionar para página de agradecimento após 2 segundos
         setTimeout(() => {
             window.location.href = 'thank_you.html?name=' + encodeURIComponent(name) + '&email=' + encodeURIComponent(email);
-        }, 1000);
+        }, 2000);
     });
 });
